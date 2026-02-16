@@ -1,0 +1,23 @@
+body {
+    margin: 0;
+    height: 100vh;
+    background: White;
+    overflow: hidden;
+    font-family: Arial, sans-serif;
+}
+
+#interfaz-operativa {
+    display: block;
+    width: 100%;
+    height: 100%;
+}
+
+.contenedor_chat {
+    padding: 20px;
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.contenedor_chat h1 {
+    color: #333;
+}

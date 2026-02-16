@@ -1,0 +1,58 @@
+LIENZO DE PLANEACIÓN: VECTOR PRISMA 
+Arquitectura de Automatización Global con Supervisión Intermedia y Datos Federados
+1. Núcleo de Resiliencia y Evolución (Sandbox 0)
+
+Agente de Estrategia Evolutiva: Genera nuevos métodos, planes de mercado, análisis de riesgos y estudios de costos en aislamiento total.
+
+
+Agente Analista de Evolución (Subgerente): Revisa la entrega del Agente de Estrategia, optimiza el código y valida que las pruebas de supervisión cumplan con los procedimientos debidos antes de enviar la propuesta al nivel superior.
+
+
+Base de Datos LDB-EV (Local): Almacena exclusivamente históricos de simulación, logs de errores estructurales y métricas de costo pre-operativas.
+
+2. Célula de Integridad y Adaptación Legal Proactiva
+
+Agente de Investigación Jurisdiccional: Realiza la búsqueda profunda de leyes locales y normativas fiscales (declaración de renta).
+
+
+Agente Analista Legal (Subgerente): Filtra los hallazgos, verifica que la vía propuesta no sea restrictiva y optimiza la estrategia legal para que el sistema opere siempre en el margen lícito.
+
+
+Base de Datos LDB-LEG (Local): Repositorio de jurisprudencia actualizada, registros de auditoría forense y parámetros de cumplimiento gubernamental.
+
+3. Orquestación y Decisor Superior (The High-Power Core)
+Agente Decisor Superior (Gerencia Central): Recibe únicamente propuestas ya filtradas y optimizadas por los subgerentes. Realiza la validación final de salud sistémica y autoriza la ejecución global.
+
+
+Criptografía SNAKE-256: Aplica el blindaje de seguridad máxima y firma digital de grado agencia a todas las decisiones finales.
+
+
+Unidad de Autorreparación (Salud 5ms): Escanea errores de protocolo y fallas sistémicas cada 5ms para mantener la integridad.
+
+GDB (Global Database Unified): El "Cerebro de Datos" donde todas las LDB locales terminan unidas, sincronizando la información para una visión global inmutable.
+
+4. Capa de Ejecución y Enjambre Operativo
+
+Agente Ejecutor (Enjambre): Realiza el trabajo técnico y operativo final automatizado.
+
+
+Agente Analista de Operaciones (Subgerente): Supervisa la calidad del trabajo entregado por el enjambre, optimiza el uso de recursos y ajusta la Fuente de Acceso Adaptativa según la ingesta de datos.
+
+
+Base de Datos LDB-OPS (Local): Almacena registros de transacciones exitosas, estados de los nodos y telemetría de ejecución en tiempo real.
+
+5. Flujo de Trabajo Descentralizado (Step-by-Step)
+
+Ingesta Inteligente: El sistema recibe datos y los deriva a la entidad correspondiente según la necesidad.
+
+Procesamiento Local: Cada entidad (Evolución o Legal) procesa la información con su agente primario.
+
+Optimización por Subgerente: El Agente Analista de la fase revisa, corrige errores de protocolo iniciales y guarda el progreso en su propia Base de Datos Local (LDB).
+
+
+Validación de Potencia: El Agente Decisor Superior recibe una síntesis optimizada, verifica la salud global y firma la orden con SNAKE-256.
+
+Ejecución y Sincronización: El enjambre ejecuta la tarea. Al finalizar, todas las LDB se unifican en la GDB para mantener la coherencia del sistema completo.
+
+
+Intervención de Seguridad: Un ingeniero calificado puede acceder a cualquier LDB o al núcleo central para realizar ajustes granulares sin detener el engranaje global
