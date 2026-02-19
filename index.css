@@ -1,24 +1,74 @@
 body {
     margin: 0;
     height: 100vh;
-    background: linear-gradient(-45deg, #2193b0, #6dd5ed, #2193b0, #6dd5ed);/*coordenadas para el color*/
-    background-size:400% 400%; /*Cambio de grados para generar un efecto de delizante*/
-    animation:gradient 10s ease infinite; /*Efecto de animacion*/
+    background: linear-gradient(135deg, #e1f0fa 0%, #b5d1e6 50%, #8fb3d1 100%);
+    /*coordenadas para el color*/
+    background-size: 300% 300%;
+    /*Cambio de grados para generar un efecto de delizante*/
+    animation: gradientShift 20s ease-in-out infinite;
+    /*Efecto de animacion*/
     overflow: hidden;
-    font-family: Arial, sans-serif;
+    font-family: 'Segoe UI', Tahoma, Verdana, sans-serif;
+    position: relative;
 }
 
-@keyframes gradient {
-    0%{
-        background-position: 0% 50%;
+body:before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: radial-gradient(circle at 30% 50%, rgba(255, 255, 255, 0.1) 0%, transparent 50%),
+        radial-gradient(circle at 70% 80%, rgba(255, 255, 255, 0.1) 0%, transparent 50%),
+        radial-gradient(circle at 10% 20%, rgba(255, 255, 255, 0.08) 0%, transparent 40%),
+        radial-gradient(circle at 90% 30%, rgba(255, 255, 255, 0.08) 0%, transparent 40%);
+    pointer-events: none;
+    animation: particles 20s ease-in-out infinite;
+    /*Tiempo de la animacion cambios*/
+}
+
+/*Grados para cambios de color*/
+@keyframes gradientShift {
+    0% {
+        background-position: 0% 0%;
     }
-    50%{
-        background-position: 100% 50%;
+
+    /* 25% {
+        background-position: 50% 50%;
+    }*/
+
+    50% {
+        background-position: 100% 100%;
     }
-    100%{
-        background-position: 0% 50%;
+
+    /* 75% {
+        background-position: 50% 50%;
+    }*/
+
+    100% {
+        background-position: 0% 0%;
     }
 }
+
+/*particulas para la animacion*/
+/*
+@keyframes particles {
+    0% {
+        opacity: 0.5;
+        transform: scale(1);
+    }
+
+    50% {
+        opacity: 1;
+        transform: scale(1.1);
+    }
+
+    100% {
+        opacity: 0.5;
+        transform: scale(1);
+    }
+}*/
 
 #interfaz-operativa {
     display: block;
