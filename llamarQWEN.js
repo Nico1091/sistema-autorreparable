@@ -1,4 +1,4 @@
-const url = "http://localhost:1234/v1/chat/completions";
+const url_chat = "http://localhost:1234/v1/chat/completions";
 /*Constante de url ubicacion donde se encuentra especificamente: 
 1.la ubicacion y puertos en local
 2.v1: la version especifica que se esta usando   
@@ -44,7 +44,7 @@ async function llamarQwen(){
     try {
         //intentar cumplir con la funcion de peticion del usuario al sistema
         console.log("Enviando tu peticion al sistema local ... "); // Cambiar a animacion de cargando
-        const respuesta = await fetch(url, {
+        const respuesta = await fetch(url_chat, {
             method: "POST",
             headers: {"Content-Type": "application/json" },
             body: JSON.stringify(Rol)
