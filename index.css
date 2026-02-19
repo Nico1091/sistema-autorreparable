@@ -1,9 +1,23 @@
 body {
     margin: 0;
     height: 100vh;
-    background: White;
+    background: linear-gradient(-45deg, #2193b0, #6dd5ed, #2193b0, #6dd5ed);/*coordenadas para el color*/
+    background-size:400% 400%; /*Cambio de grados para generar un efecto de delizante*/
+    animation:gradient 10s ease infinite; /*Efecto de animacion*/
     overflow: hidden;
     font-family: Arial, sans-serif;
+}
+
+@keyframes gradient {
+    0%{
+        background-position: 0% 50%;
+    }
+    50%{
+        background-position: 100% 50%;
+    }
+    100%{
+        background-position: 0% 50%;
+    }
 }
 
 #interfaz-operativa {
