@@ -28,7 +28,7 @@ async function sincronizarConVector(rol, contenido) {
 window.sincronizarConVector = sincronizarConVector;
 
 /** Esta es la conexion a registro de la base de datos de mi dominio web */
-const url_regis = "http://postvental.com.co/registro.php";
+const url_regis = "https://postvental.com.co/registro.php";
 
 /**
  * Registra un nuevo cliente en la base de datos Vector
@@ -64,3 +64,7 @@ async function registro(usuario, correo, password) {
     }
 }
 window.registro = registro;
+function irARegistro() {
+    window.location.href = "Registro_usuario.html";
+}
+window.irARegistro = irARegistro;

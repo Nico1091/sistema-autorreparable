@@ -9,6 +9,29 @@
     <link rel="stylesheet" href="index.css">
     <link rel="stylesheet" href="animacion_index.css">
     <link rel="stylesheet" href="Sender.css">
+    <link rel="stylesheet" href="Registro_usuario.css"> 
 </head>
+
+<body>
+    
+    <div id="sistema_operativo"></div>
+    <div class="seccion-centrada"></div>
+    <div class="contenedor_registro">
+        <h3 style="text-align: center; color:#333">Registro de cliente </h3>    
+        <input type="text" id="reg_usuario" placeholder="Nombre de Usuario" class="chat_input"> <!--Registro de usuarios-->
+        <input type="email" id="reg_correo" placeholder="correo electronico" class="chat_input"> <!--Campo de correo electronico -->
+        <input type="password" id="reg_pass" placeholder="Contraseña" class="chat_input">
+
+        <button class="boton_de_chat" onclick="ejecutarRegistro()" style="width: 100%; margin: 0;">
+            Registrarse
+        </button>
+
+        <a href="index.html" style="text-align: center; font-size: 0,8em; color: #666; text-decoration: none; margin-top: 10px" >
+            Volver al acceso
+        </a>
+    </div>
+    <script src="conexionbdAdominio.js"></script>
+    <script src="ejecutarregistro.js"></script>
+</body>
 
 </html>
