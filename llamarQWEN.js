@@ -11,8 +11,8 @@ async function llamarQwen() {
     /*Variable para guardar los chats*/
     const inputChat = document.getElementById('input_chat');
     const mensajeUsuario = inputChat.value.trim();
-    if(window.sincronizarConVector){
-        window.sincronizarConVector('user',mensajeUsuario);
+    if (window.sincronizarConVector) {
+        window.sincronizarConVector('user', mensajeUsuario);
     }
     const Rol = {
         //Metodo para que el rol que debe cumplir el modelo
@@ -79,6 +79,12 @@ async function llamarQwen() {
 
 
             const PanelRespuestas = document.querySelector('.Panel_Answers');
+            PanelRespuestas.style.display = 'block';
+
+            window.scrollTo({
+                top: document.body.scrollHeight,
+                behavior: 'smooth'
+            });
             const id_Work = document.querySelector('.Identificador_tarea');
             if (PanelRespuestas && id_Work) {
                 PanelRespuestas.style.display = 'block';

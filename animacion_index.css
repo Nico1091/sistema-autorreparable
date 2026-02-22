@@ -1,41 +1,4 @@
-body:before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: radial-gradient(circle at 30% 50%, rgba(255, 255, 255, 0.1) 0%, transparent 50%),
-        radial-gradient(circle at 70% 80%, rgba(255, 255, 255, 0.1) 0%, transparent 50%),
-        radial-gradient(circle at 10% 20%, rgba(255, 255, 255, 0.08) 0%, transparent 40%),
-        radial-gradient(circle at 90% 30%, rgba(255, 255, 255, 0.08) 0%, transparent 40%);
-    pointer-events: none;
-    animation: particles 20s ease-in-out infinite;
-    /*Tiempo de la animacion cambios*/
-}
-
-/*Grados para cambios de color*/
-@keyframes gradientShift {
-    0% {
-        background-position: 0% 0%;
-    }
-
-    /* 25% {
-        background-position: 50% 50%;
-    }*/
-
-    50% {
-        background-position: 100% 100%;
-    }
-
-    /* 75% {
-        background-position: 50% 50%;
-    }*/
-
-    100% {
-        background-position: 0% 0%;
-    }
-}
+/* Animación index - Minimalista (los estilos principales están en index.css) */
 
 html {
     height: 100%;

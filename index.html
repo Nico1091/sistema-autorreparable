@@ -1,49 +1,64 @@
 <!DOCTYPE html>
-<!--Documento de tipo HTML-->
 <html lang="es">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Vector Prisma</title> <!--Titulo del programa es la parte que aparece como nombre de la ventana-->
+    <title>Vector Prisma - Sistema de Consulta</title>
+    
+    <!-- Estilos -->
     <link rel="stylesheet" href="index.css">
-    <link rel="stylesheet" href="AccesoN.css">
     <link rel="stylesheet" href="animacion_index.css">
+    <link rel="stylesheet" href="Answers.css">
     <link rel="stylesheet" href="Sender.css">
-    <link rel="stylesheet" href="Answers.css"> <!--no descomentar estilos para panel indexado-->
+    <link rel="stylesheet" href="AccesoN.css">
+    
+    <!-- Font Awesome para íconos -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 </head>
-
 <body>
-    <div id="estado">DESCONECTADO</div>
-    <div id="sistema_operativo"></div>
-    <div id="interfaz-operativa">
+    <!-- Estado de conexión (controlado por JS) -->
+    <div id="estado" style="display: none;">DESCONECTADO</div>
+    
+    <!-- Botón de registro - CORREGIDO -->
+    <button class="boton-registro-destacado" onclick="irARegistro()">
+        <i class="fas fa-user-plus"></i> Registrate aquí
+    </button>
 
-        <button class="boton_de_chat" id="btn-ir-registro" onclick="irARegistro()"
-            style="margin-bottom: 10px; width: auto; padding: 10px 20px; font-size: 0.8em; opacity: 0.8;">
-            Registrate
-        </button>
-
+    <!-- Interfaz principal -->
+    <div id="interfaz-operativa" style="display: block;">
+        <!-- Historial de chat (opcional) -->
+        <div id="historial-chat"></div>
+        
+        <!-- Contenedor del chat - CORREGIDO (contenedor_chat con E) -->
         <div class="contenedor_chat">
-            <div id="historial-chat"></div>
-            <!--Area para mostrar los mensajes del chat-->
             <div class="Contain_Input_chat">
-                <input type="text" class="chat_input" id="input_chat" placeholder="Por favor digite su peticion">
+                <input type="text" id="input_chat" class="chat_input" 
+                       placeholder="Escribe tu mensaje para Qwen...">
             </div>
-            <button class="boton_de_chat" id="Enviar">
-                <!--Boton de chat-->
-                → <i class="fa fa-arrow-right" aria-hidden="true"></i>
+            <button class="boton_de_chat" id="btn-enviar">
+                <i class="fas fa-paper-plane"></i>
             </button>
         </div>
     </div>
-    <div class="Panel_Answers">
-        <div class="Identificador_tarea"> </div> <!--Colocar algo referente a la conversacion-->
-    </div>
-    <script src="AccesoN.js"></script><!--Recurso de funcion fallo de conexion-->
-    <script src="conexion.js"></script>
-    <script src="conexionbdAdominio.js"></script>
-    <script src="llamarQWEN.js"></script>
-    <script src="chat_boton.js"></script>
-</body>
 
+    <!-- Panel de respuestas -->
+    <div class="Panel_Answers">
+        <div class="Identificador_tarea"></div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="AccesoN.js"></script>
+    <script src="conexion.js"></script>
+    <script src="llamarQwen.js"></script>
+    <script src="chat_boton.js"></script>
+    <script src="conexionbdAdominio.js"></script>
+    <script src="ejecutarregistro.js"></script>
+    
+    <script>
+        // Función para redirigir al registro
+        window.irARegistro = window.irARegistro || function() {
+            window.location.href = "Registro_usuario.html";
+        };
+    </script>
+</body>
 </html>
-<!--Fin del documento-->

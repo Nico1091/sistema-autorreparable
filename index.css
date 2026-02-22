@@ -1,49 +1,335 @@
+/* ========================
+   ESTILOS PRINCIPALES - Vector Prisma
+   Paleta de colores: Gradientes modernos con efectos 3D
+   ======================== */
+
 body {
     margin: 0;
     height: 100vh;
-    background: linear-gradient(135deg, #e1f0fa 0%, #b5d1e6 50%, #8fb3d1 100%);
-    /*coordenadas para el color*/
-    background-size: 300% 300%;
-    /*Cambio de grados para generar un efecto de delizante*/
-    animation: gradientShift 20s ease-in-out infinite;
-    /*Efecto de animacion*/
-    overflow: hidden;
-    font-family: 'Segoe UI', Tahoma, Verdana, sans-serif;
-    position: relative;
+    background: linear-gradient(135deg, #0f0c29 0%, #302b63 50%, #24243e 100%);
+    background-size: 400% 400%;
+    animation: gradientShift 15s ease infinite;
+    overflow-x: hidden;
+    font-family: 'Segoe UI', 'Roboto', Tahoma, Verdana, sans-serif;
 }
 
-
-/*particulas para la animacion*/
-/*
-@keyframes particles {
+/* Animación de gradiente de fondo */
+@keyframes gradientShift {
     0% {
-        opacity: 0.5;
-        transform: scale(1);
+        background-position: 0% 50%;
     }
 
     50% {
-        opacity: 1;
-        transform: scale(1.1);
+        background-position: 100% 50%;
     }
 
     100% {
-        opacity: 0.5;
-        transform: scale(1);
+        background-position: 0% 50%;
     }
-}*/
+}
 
-#interfaz-operativa {
-    display: block;
+/* Partículas flotantes de fondo */
+body::before {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
     width: 100%;
     height: 100%;
+    background:
+        radial-gradient(circle at 20% 80%, rgba(120, 119, 198, 0.3) 0%, transparent 50%),
+        radial-gradient(circle at 80% 20%, rgba(79, 172, 254, 0.3) 0%, transparent 50%),
+        radial-gradient(circle at 40% 40%, rgba(168, 85, 247, 0.2) 0%, transparent 40%);
+    pointer-events: none;
+    z-index: 0;
+}
+
+/* Estado de conexión */
+#estado {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    padding: 10px 25px;
+    background: linear-gradient(135deg, #ff6b6b, #ee5a5a);
+    color: white;
+    font-weight: 700;
+    font-size: 0.9em;
+    border-radius: 25px;
+    box-shadow: 0 4px 15px rgba(255, 107, 107, 0.4);
+    z-index: 1001;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+/* Contenedor principal - MODIFICADO para alinear abajo */
+#interfaz-operativa {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    /* Empuja todo al fondo */
+    align-items: center;
+    padding-bottom: 30px;
+    box-sizing: border-box;
+    pointer-events: none;
+    /* Permite clics en elementos detrás si es necesario */
+}
+
+/* ========================
+   BOTÓN DE REGISTRO
+   ======================== */
+
+.boton-registro-destacado {
+    position: fixed;
+    top: 25px;
+    left: 25px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 14px 28px;
+    font-size: 0.95em;
+    font-weight: 700;
+    color: white;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    border: none;
+    border-radius: 50px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 6px 20px rgba(102, 126, 234, 0.5);
+    z-index: 1000;
+}
+
+.boton-registro-destacado:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 12px 35px rgba(102, 126, 234, 0.7);
+}
+
+.boton-registro-destacado i {
+    font-size: 1.1em;
+}
+
+/* ========================
+   CONTENEDOR DE CHAT - MODIFICADO
+   ======================== */
+
+/* ELIMINAR ESTE BLOQUE COMPLETO */
+.contenedor_chat,
+#btn-ir-registro,
+.Panel_Answers {
+    width: 90%;
+    max-width: 600px;
+    background: rgba(255, 255, 255, 0.8);
+    backdrop-filter: blur(15px);
+    border-radius: 20px;
+    padding: 15px;
+    margin-bottom: 10px;
+    /* Espacio con el cuadro de chat de abajo */
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    /* Animación para que aparezca suavemente */
+    animation: slideUp 0.4s ease-out;
+}
+
+.contenedor_chat:hover {
+    box-shadow: 0 15px 50px rgba(0, 0, 0, 0.5);
+    transform: translateY(-3px);
+    border-color: rgba(255, 255, 255, 0.4);
 }
 
 .contenedor_chat {
-    padding: 20px;
-    max-width: 800px;
-    margin: 0 auto;
+    position: relative;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    width: 90%;
+    max-width: 650px;
+    padding: 12px 12px 12px 25px;
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.18) 0%, rgba(255, 255, 255, 0.1) 100%);
+    backdrop-filter: blur(20px);
+    border-radius: 60px;
+    border: 1px solid rgba(255, 255, 255, 0.25);
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.4);
+    margin-bottom: 30px;
+    pointer-events: auto;
+    /* IMPORTANTE: permite hacer clic en el chat */
 }
 
-.contenedor_chat h1 {
-    color: #333;
+.contenedor_chat,
+#btn-ir-registro,
+.Panel_Answers {
+    width: 90%;
+    max-width: 600px;
+    background: rgba(255, 255, 255, 0.8);
+    backdrop-filter: blur(15px);
+    border-radius: 20px;
+    padding: 15px;
+    margin-bottom: 10px;
+    /* Espacio con el cuadro de chat de abajo */
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    /* Animación para que aparezca suavemente */
+    animation: slideUp 0.4s ease-out;
+}
+
+/* Contenedor del input */
+.Contain_Input_chat {
+    flex: 1;
+    position: relative;
+}
+
+/* Campo de texto del chat */
+.chat_input {
+    width: 100%;
+    padding: 18px 0;
+    /* Más alto */
+    border: none;
+    background: transparent;
+    font-size: 17px;
+    font-family: inherit;
+    outline: none;
+    color: #fff;
+}
+
+.chat_input::placeholder {
+    color: rgba(255, 255, 255, 0.6);
+    font-style: italic;
+    font-size: 16px;
+}
+
+/* ========================
+   BOTÓN DE ENVIAR
+   ======================== */
+
+.boton_de_chat {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 55px;
+    height: 55px;
+    padding: 0;
+    background: linear-gradient(135deg, #00d2ff 0%, #3a7bd5 100%);
+    color: white;
+    border: none;
+    border-radius: 50%;
+    font-size: 22px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 20px rgba(0, 210, 255, 0.5);
+    flex-shrink: 0;
+}
+
+.boton_de_chat:hover {
+    transform: scale(1.1) rotate(5deg);
+    box-shadow: 0 8px 30px rgba(0, 210, 255, 0.8);
+}
+
+.boton_de_chat:active {
+    transform: scale(0.95);
+}
+
+.boton_de_chat:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+    transform: none;
+}
+
+/* ========================
+   PANEL DE RESPUESTAS
+   ======================== */
+
+.Panel_Answers {
+    position: fixed;
+    bottom: 100px;
+    /* Subido para no tapar el chat */
+    right: 30px;
+    max-width: 400px;
+    max-height: 500px;
+    overflow-y: auto;
+    padding: 25px;
+    background: linear-gradient(135deg, rgba(45, 45, 80, 0.95) 0%, rgba(30, 30, 60, 0.95) 100%);
+    backdrop-filter: blur(15px);
+    border-radius: 20px;
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    box-shadow: 0 15px 50px rgba(0, 0, 0, 0.5);
+    display: none;
+    z-index: 999;
+    animation: slideIn 0.4s ease-out;
+}
+
+@keyframes slideIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px) scale(0.95);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
+
+.Panel_Answers::-webkit-scrollbar {
+    width: 8px;
+}
+
+.Panel_Answers::-webkit-scrollbar-track {
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 4px;
+}
+
+.Panel_Answers::-webkit-scrollbar-thumb {
+    background: linear-gradient(135deg, #667eea, #764ba2);
+    border-radius: 4px;
+}
+
+.Identificador_tarea {
+    font-size: 15px;
+    font-weight: 600;
+    color: #fff;
+    margin-bottom: 15px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.15);
+    line-height: 1.6;
+    white-space: pre-wrap;
+    /* Para que respete los saltos de línea */
+    word-wrap: break-word;
+}
+
+/* ========================
+   HISTORIAL DE CHAT (opcional)
+   ======================== */
+
+#historial-chat {
+    width: 90%;
+    max-width: 650px;
+    max-height: 200px;
+    overflow-y: auto;
+    margin-bottom: 15px;
+    padding: 15px;
+    color: rgba(255, 255, 255, 0.9);
+    font-size: 14px;
+    background: rgba(0, 0, 0, 0.2);
+    border-radius: 15px;
+    backdrop-filter: blur(5px);
+    display: none;
+    /* Oculto por defecto, actívalo si lo necesitas */
+}
+
+#historial-chat::-webkit-scrollbar {
+    width: 6px;
+}
+
+#historial-chat::-webkit-scrollbar-track {
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 3px;
+}
+
+#historial-chat::-webkit-scrollbar-thumb {
+    background: rgba(255, 255, 255, 0.3);
+    border-radius: 3px;
 }
