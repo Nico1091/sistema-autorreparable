@@ -5,7 +5,17 @@ const url_chat = "http://localhost:1234/v1/chat/completions";
 3.chat: la llamada a la ubicacion del chat
 4.completions: la peticion de que complete las respuestas de manera estadistica
 */
+
+
 async function llamarQwen() {
+    /*Variable para guardar los chats*/
+    const inputChat = document.getElementById('input_chat');
+    const mensajeUsuario = inputChat.value.trim();
+    if(window.sincronizarConVector){
+        window.sincronizarConVector('user',mensajeUsuario);
+    }
+
+
     /*funcion para sincronizar*/
     const Rol = {
         //Metodo para que el rol que debe cumplir el modelo
@@ -35,8 +45,7 @@ async function llamarQwen() {
                     "Tu nombre es agente decisor superior"
             },
             {
-                role: "user", content: "Confirmale al usuario todo lo que este te pida y si este te pide proyectos oo demas deberas enviar todo a los demas departamentos" +
-                    "y esperar a ver que sucede "
+                role: "user", content: document.getElementById('input_chat').value.trim()
                 //Role que cumple para cumplir con las peticiones del usuario
             }
 
@@ -44,6 +53,10 @@ async function llamarQwen() {
         temperature: 0.8
     };  // fin de la peticion de rol a cumplir por el modelo
     try {
+
+        if (window.sincronizarConVector) {
+            window.sincronizarConVector('user', mensajeUsuario);
+        }
         //intentar cumplir con la funcion de peticion del usuario al sistema
         console.log("Enviando tu peticion al sistema local ... "); // Cambiar a animacion de cargando
         const respuesta = await fetch(url_chat, {
@@ -61,11 +74,22 @@ async function llamarQwen() {
         // Verificar que la respuesta tenga el formato esperado
         console.log(datos.choices[0].message.content);
         if (datos && datos.choices && datos.choices.length > 0 && datos.choices[0].message) {
+
+            /*Cambios De BD*/
+            /*Constante para la base de datos*/
+            const contenidoIA = datos.choices[0].message.content;
+            if (window.sincronizarConVector) {
+                window.sincronizarConVector('assistant', contenidoIA);
+            }
+
+
+
             const PanelRespuestas = document.querySelector('.Panel_Answers');
             const id_Work = document.querySelector('.Identificador_tarea');
             if (PanelRespuestas && id_Work) {
                 PanelRespuestas.style.display = 'block';
                 id_Work.textContent = datos.choices[0].message.content;
+                return datos;
             }
 
         } else {
@@ -81,6 +105,7 @@ async function llamarQwen() {
         } else {
             alert("ERROR DE CONEXION: " + error.message);
         }
+        throw error;
     }
 
 }

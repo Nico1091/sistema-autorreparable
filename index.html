@@ -10,7 +10,7 @@
     <link rel="stylesheet" href="AccesoN.css">
     <link rel="stylesheet" href="animacion_index.css">
     <link rel="stylesheet" href="Sender.css">
-   <link rel="stylesheet" href="Answers.css"> <!--no descomentar estilos para panel indexado-->
+    <link rel="stylesheet" href="Answers.css"> <!--no descomentar estilos para panel indexado-->
 </head>
 
 <body>
@@ -18,11 +18,12 @@
     <div id="sistema_operativo"></div>
     <div id="interfaz-operativa">
         <div class="contenedor_chat">
+            <div id="historial-chat"></div>
             <!--Area para mostrar los mensajes del chat-->
             <div class="Contain_Input_chat">
                 <input type="text" class="chat_input" id="input_chat" placeholder="Por favor digite su peticion">
             </div>
-            <button class="boton_de_chat">
+            <button class="boton_de_chat" id="Enviar">
                 <!--Boton de chat-->
                 → <i class="fa fa-arrow-right" aria-hidden="true"></i>
             </button>
@@ -30,10 +31,10 @@
     </div>
     <div class="Panel_Answers">
         <div class="Identificador_tarea"> </div> <!--Colocar algo referente a la conversacion-->
-    </div> 
-
+    </div>
     <script src="AccesoN.js"></script><!--Recurso de funcion fallo de conexion-->
     <script src="conexion.js"></script>
+    <script src="conexionbdAdominio.js"></script>
     <script src="llamarQWEN.js"></script>
     <script src="chat_boton.js"></script>
 </body>

@@ -6,8 +6,15 @@ document.addEventListener('DOMContentLoaded', function () {
     Enviar.addEventListener('click', function () {
         const mensaje = entrada_chat.value.trim();
         if (mensaje) {
-            window.llamarQwen()
-            entrada_chat.value = '';
+            entrada_chat.disabled = true;
+            Enviar.disabled = true;
+
+            window.llamarQwen().finally(() => {
+                entrada_chat.disabled = false;
+                Enviar.disabled = false;
+                entrada_chat.value = '';
+                entrada_chat.focus();
+            });
         }
     });
     entrada_chat.addEventListener('keypress', function (e) {

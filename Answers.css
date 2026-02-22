@@ -1,6 +1,9 @@
+/*Control del Panel de respuestas*/
 .Panel_Answers {
     width: 100%;
-    max-width: 600px;
+    max-width: 600px; /*Maximo de ancho*/
+    max-height: 400px; /*Maximo de largo*/
+    overflow: auto; /*Subre que no se pase el angulo de respuestas de la IA*/
     margin: 20px auto 80px auto; /* Margen inferior para que no se monte con el chat */
     background: rgba(255, 255, 255, 0.8);
     backdrop-filter: blur(10px);
