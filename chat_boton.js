@@ -9,12 +9,16 @@ document.addEventListener('DOMContentLoaded', function () {
             entrada_chat.disabled = true;
             Enviar.disabled = true;
 
-            window.llamarQwen().finally(() => {
-                entrada_chat.disabled = false;
-                Enviar.disabled = false;
-                entrada_chat.value = '';
-                entrada_chat.focus();
-            });
+            window.llamarQwen()
+                .catch((error) => {
+                    console.error('Error en llamada Qwen:', error);
+                })
+                .finally(() => {
+                    entrada_chat.disabled = false;
+                    Enviar.disabled = false;
+                    entrada_chat.value = '';
+                    entrada_chat.focus();
+                });
         }
     });
     entrada_chat.addEventListener('keypress', function (e) {

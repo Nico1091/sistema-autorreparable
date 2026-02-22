@@ -14,9 +14,6 @@ async function llamarQwen() {
     if(window.sincronizarConVector){
         window.sincronizarConVector('user',mensajeUsuario);
     }
-
-
-    /*funcion para sincronizar*/
     const Rol = {
         //Metodo para que el rol que debe cumplir el modelo
         model: "qwen/qwen2.5-coder-14b",
@@ -54,9 +51,6 @@ async function llamarQwen() {
     };  // fin de la peticion de rol a cumplir por el modelo
     try {
 
-        if (window.sincronizarConVector) {
-            window.sincronizarConVector('user', mensajeUsuario);
-        }
         //intentar cumplir con la funcion de peticion del usuario al sistema
         console.log("Enviando tu peticion al sistema local ... "); // Cambiar a animacion de cargando
         const respuesta = await fetch(url_chat, {
@@ -101,7 +95,11 @@ async function llamarQwen() {
         //Metodo de prevencion ante eventos no esperados en este modelo(Encapsulacion de errores)
         console.error("ERROR DE CONEXION", error);
         if (window.AccesoN && typeof window.AccesoN.activarAlerta === 'function') {
-            window.AccesoN.activarAlerta();
+            try {
+                window.AccesoN.activarAlerta();
+            } catch (e) {
+                alert("ERROR DE CONEXION: " + error.message);
+            }
         } else {
             alert("ERROR DE CONEXION: " + error.message);
         }

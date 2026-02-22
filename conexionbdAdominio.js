@@ -52,7 +52,7 @@ async function registro(usuario, correo, password) {
         const resultado = await respuesta.json();
         console.log("Estado de registro:", resultado.msj);
 
-        if (resultado.status == "Exito") {
+        if (resultado.status === "Exito") {
             //Condicional para ver si es o no exitosa la consulta 
             console.log("El cliente ingreso al sistema");
         } else {
