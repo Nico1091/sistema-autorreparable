@@ -1,7 +1,7 @@
 /* AccesoN.css - Estilos para el sistema de alerta de conexión */
-/* LIMPIADO: eliminados comentarios y código duplicado */
+/* Estado de conexión - Versión de alerta */
 
-#estado {
+#estado-alerta {
     position: fixed;
     inset: 0;
     display: none;

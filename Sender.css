@@ -1,8 +1,8 @@
-#interfaz-operativa {
+#interfaz-operativa-sender {
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: flex-end; /* Cambiado de 'center' a 'flex-end' */
+    justify-content: flex-end;
     width: 100%;
     min-height: 100vh;
     box-sizing: border-box;

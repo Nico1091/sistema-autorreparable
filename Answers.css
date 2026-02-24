@@ -1,6 +1,7 @@
-/* Answers.css - Panel de Respuestas */
+/* Answers.css - Panel de Respuestas (Estilos adicionales) */
+/* Nota: Los estilos principales están en index.css */
 
-.Panel_Answers {
+.panel-answers-overlay {
     position: fixed;
     bottom: 30px;
     right: 30px;
