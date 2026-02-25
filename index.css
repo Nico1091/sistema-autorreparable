@@ -192,9 +192,9 @@ body::before {
     display: flex;
     align-items: center;
     gap: 10px;
-    width: 90%;
-    max-width: 650px;
-    padding: 12px 12px 12px 25px;
+    width: 120%;
+    max-width: 800px;
+    padding: 10px 2px 1px 2px;
     background: linear-gradient(135deg, rgba(255, 255, 255, 0.18) 0%, rgba(255, 255, 255, 0.1) 100%);
     backdrop-filter: blur(20px);
     border-radius: 60px;
@@ -215,25 +215,45 @@ body::before {
 /* Contenedor del input */
 .Contain_Input_chat {
     flex: 1;
+    width: 100%;
     position: relative;
 }
+/* Contenedor principal de la barra (el óvalo) */
+.input_container {
+    display: flex;
+    align-items: center;
+    background: rgba(255, 255, 255, 0.07); /* Efecto cristal */
+    backdrop-filter: blur(15px); /* Desfoque de fondo */
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    border-radius: 40px;
+    padding: 8px 25px;
+    box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+    transition: all 0.3s ease;
+}
 
-/* Campo de texto del chat */
+/* Mejora al pasar el mouse o escribir */
+.input_container:focus-within {
+    background: rgba(255, 255, 255, 0.12);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    box-shadow: 0 8px 32px 0 rgba(100, 100, 255, 0.2); /* Brillo sutil azulado */
+}
+/* Tu input con altura reducida */
 .chat_input {
+    flex: 1;
     width: 100%;
-    padding: 18px 0;
+    padding: 10px 0;        /* Reducimos de 15px a 8px para que sea más delgado */
     border: none;
     background: transparent;
-    font-size: 17px;
-    font-family: inherit;
+    font-size: 15px;       /* Un poco más pequeño para mantener la proporción */
+    font-family: 'Segoe UI', sans-serif;
     outline: none;
-    color: #fff;
+    color: #ffffff;
+    letter-spacing: 0.5px;
 }
 
 .chat_input::placeholder {
-    color: rgba(255, 255, 255, 0.6);
-    font-style: italic;
-    font-size: 16px;
+    color: rgba(255, 255, 255, 0.4);
+    font-weight: 300;
 }
 
 /* ========================
