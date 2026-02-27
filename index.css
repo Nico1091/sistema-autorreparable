@@ -34,6 +34,7 @@ body {
         opacity: 0;
         transform: translateY(20px);
     }
+
     to {
         opacity: 1;
         transform: translateY(0);
@@ -200,8 +201,9 @@ body::before {
     border-radius: 60px;
     border: 1px solid rgba(255, 255, 255, 0.25);
     box-shadow: 0 10px 40px rgba(0, 0, 0, 0.4);
-    margin-top: 550px;/*Variable para bajar el cuadro de escribir de usuario en la pantalla*/
-    margin-left:30%;
+    margin-top: 550px;
+    /*Variable para bajar el cuadro de escribir de usuario en la pantalla*/
+    margin-left: 30%;
     pointer-events: auto;
     animation: slideUp 0.4s ease-out;
 }
@@ -218,12 +220,15 @@ body::before {
     width: 100%;
     position: relative;
 }
+
 /* Contenedor principal de la barra (el óvalo) */
 .input_container {
     display: flex;
     align-items: center;
-    background: rgba(255, 255, 255, 0.07); /* Efecto cristal */
-    backdrop-filter: blur(15px); /* Desfoque de fondo */
+    background: rgba(255, 255, 255, 0.07);
+    /* Efecto cristal */
+    backdrop-filter: blur(15px);
+    /* Desfoque de fondo */
     border: 1px solid rgba(255, 255, 255, 0.15);
     border-radius: 40px;
     padding: 8px 25px;
@@ -235,16 +240,20 @@ body::before {
 .input_container:focus-within {
     background: rgba(255, 255, 255, 0.12);
     border: 1px solid rgba(255, 255, 255, 0.3);
-    box-shadow: 0 8px 32px 0 rgba(100, 100, 255, 0.2); /* Brillo sutil azulado */
+    box-shadow: 0 8px 32px 0 rgba(100, 100, 255, 0.2);
+    /* Brillo sutil azulado */
 }
+
 /* Tu input con altura reducida */
 .chat_input {
     flex: 1;
     width: 100%;
-    padding: 10px 0;        /* Reducimos de 15px a 8px para que sea más delgado */
+    padding: 10px 0;
+    /* Reducimos de 15px a 8px para que sea más delgado */
     border: none;
     background: transparent;
-    font-size: 15px;       /* Un poco más pequeño para mantener la proporción */
+    font-size: 15px;
+    /* Un poco más pequeño para mantener la proporción */
     font-family: 'Segoe UI', sans-serif;
     outline: none;
     color: #ffffff;
@@ -264,34 +273,43 @@ body::before {
     display: flex;
     align-items: center;
     justify-content: center;
-    width: 55px;
-    height: 55px;
+    width: 50px;
+    /* Un poco más pequeño para ser discreto */
+    height: 50px;
     padding: 0;
-    background: linear-gradient(135deg, #00d2ff 0%, #3a7bd5 100%);
-    color: white;
+    /* Púrpura elegante y profundo */
+    background: linear-gradient(135deg, #6a1b9a 0%, #4a148c 100%);
+    color: rgba(255, 255, 255, 0.9);
+    /* Blanco ligeramente transparente */
     border: none;
     border-radius: 50%;
-    font-size: 22px;
-    font-weight: 600;
+    font-size: 20px;
+    font-weight: 500;
     cursor: pointer;
-    transition: all 0.3s ease;
-    box-shadow: 0 4px 20px rgba(0, 210, 255, 0.5);
+    transition: all 0.4s ease;
+    /* Transición más lenta y suave */
+    /* Sombra más sutil y oscura */
+    box-shadow: 0 4px 12px rgba(74, 20, 140, 0.3);
     flex-shrink: 0;
+    transform: translate(-12px, -5px);
 }
 
 .boton_de_chat:hover {
-    transform: scale(1.1) rotate(5deg);
-    box-shadow: 0 8px 30px rgba(0, 210, 255, 0.8);
+   
+    transform: translate(-8px, -7px) scale(1.05); /*Transformacion o movimiento del boton de chat*/
+    background: linear-gradient(135deg, #7b1fa2 0%, #6a1b9a 100%);
+    box-shadow: 0 6px 15px rgba(74, 20, 140, 0.4);
 }
 
 .boton_de_chat:active {
-    transform: scale(0.95);
+    transform: scale(0.98);
 }
 
 .boton_de_chat:disabled {
-    opacity: 0.5;
+    opacity: 0.4;
     cursor: not-allowed;
-    transform: none;
+    filter: grayscale(100%);
+    /* Lo hace gris cuando no está disponible */
 }
 
 /* ========================
