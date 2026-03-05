@@ -1,103 +1,78 @@
-/* ========================
-   Registro_usuario.css
-   Estilos modernos con efectos 3D
-   ======================== */
-
-.seccion-entrada {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
-    background: linear-gradient(135deg, #0f0c29 0%, #302b63 50%, #24243e 100%);
-    background-size: 400% 400%;
-    animation: gradientShift 15s ease infinite;
-}
-
-@keyframes gradientShift {
-    0% { background-position: 0% 50%; }
-    50% { background-position: 100% 50%; }
-    100% { background-position: 0% 50%; }
-}
-
+/* Registro de usuario - Estilo Minimalista */
 .contenedor_registro {
-    background: linear-gradient(135deg, 
-        rgba(255, 255, 255, 0.05) 0%, 
-        rgba(255, 255, 255, 0.02) 100%);
-    backdrop-filter: blur(30px);
-    -webkit-backdrop-filter: blur(30px);
+    background: #ffffff;
     padding: 40px;
-    border-radius: 25px;
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    box-shadow: 
-        0 15px 50px rgba(0, 0, 0, 0.5),
-        0 8px 20px rgba(102, 126, 234, 0.3),
-        inset 0 1px 0 rgba(255, 255, 255, 0.1);
-    display: flex;
-    flex-direction: column;
-    gap: 15px;
-    width: 90%;
-    max-width: 350px;
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
+    border-radius: 12px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.06);
+    width: 100%;
+    max-width: 340px;
+    text-align: center;
+    border: 1px solid #f0f0f0;
+    margin: auto;
 }
 
 .contenedor_registro h3 {
-    color: #fff;
-    text-align: center;
-    margin: 0 0 20px 0;
-    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+    color: #2d3436;
+    margin-bottom: 30px;
+    font-size: 18px;
+    font-weight: 500;
 }
 
-.contenedor_registro input {
+.contenedor_registro .chat_input {
     width: 100%;
-    padding: 15px 20px;
-    border: none;
-    border-radius: 50px;
-    background: rgba(255, 255, 255, 0.1);
-    color: #fff;
-    font-size: 14px;
-    outline: none;
+    padding: 12px 14px;
+    margin-bottom: 12px;
+    border: 1px solid #dfe6e9;
+    border-radius: 6px;
+    font-size: 13px;
+    transition: all 0.2s;
     box-sizing: border-box;
-    transition: all 0.3s ease;
+    background: #fafafa;
+    color: #2d3436;
 }
 
-.contenedor_registro input::placeholder {
-    color: rgba(255, 255, 255, 0.5);
+.contenedor_registro .chat_input:focus {
+    border-color: #6c5ce7;
+    outline: none;
+    background: #fff;
 }
 
-.contenedor_registro input:focus {
-    background: rgba(255, 255, 255, 0.2);
-    box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.3);
+.contenedor_registro .chat_input::placeholder {
+    color: #b2bec3;
 }
 
-.contenedor_registro button {
-    padding: 15px 30px;
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+.contenedor_registro .boton_de_chat {
+    width: 100%;
+    padding: 12px;
+    background: #6c5ce7;
     color: white;
     border: none;
-    border-radius: 50px;
-    font-size: 16px;
-    font-weight: 600;
+    border-radius: 6px;
+    font-size: 13px;
+    font-weight: 500;
     cursor: pointer;
-    transition: all 0.3s ease;
-    box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);
+    transition: all 0.2s;
+    margin: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
 }
 
-.contenedor_registro button:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 6px 20px rgba(102, 126, 234, 0.6);
+.contenedor_registro .boton_de_chat:hover {
+    background: #5b4cdb;
 }
 
 .contenedor_registro a {
+    display: block;
     text-align: center;
-    color: rgba(255, 255, 255, 0.7);
+    font-size: 12px;
+    color: #6c5ce7;
     text-decoration: none;
-    font-size: 14px;
-    transition: color 0.3s ease;
+    margin-top: 16px;
+    transition: color 0.2s;
 }
 
 .contenedor_registro a:hover {
-    color: #fff;
+    color: #5b4cdb;
 }
