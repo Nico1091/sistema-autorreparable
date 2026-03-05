@@ -20,7 +20,7 @@ async function llamarQwen() {
         //modelo que solicito se cargue especificacmente 
         messages: [
             {
-                role: "system", content: "Eres Qwen un modelo gerente" +
+                role: "system", content: "Responde siempre en español. Eres Qwen un modelo gerente" +
                     //este es el rol que ocupa en el sistema este modelo
                     "cuya labor es encargarte de un departamento" +
                     "el cual es gerencia" +
@@ -47,7 +47,8 @@ async function llamarQwen() {
             }
 
         ],
-        temperature: 0.8
+        temperature: 0.5,
+        max_tokens: 1000
     };  // fin de la peticion de rol a cumplir por el modelo
     try {
 
@@ -76,21 +77,14 @@ async function llamarQwen() {
                 window.sincronizarConVector('assistant', contenidoIA);
             }
 
-
-
+            // Ocultar Panel_Answers y mostrar en historial-chat
             const PanelRespuestas = document.querySelector('.Panel_Answers');
-            PanelRespuestas.style.display = 'block';
-
-            window.scrollTo({
-                top: document.body.scrollHeight,
-                behavior: 'smooth'
-            });
-            const id_Work = document.querySelector('.Identificador_tarea');
-            if (PanelRespuestas && id_Work) {
-                PanelRespuestas.style.display = 'block';
-                id_Work.textContent = datos.choices[0].message.content;
-                return datos;
+            if (PanelRespuestas) {
+                PanelRespuestas.style.display = 'none';
             }
+            
+            // La respuesta se muestra en el chat a través de chat_boton.js
+            return datos;
 
         } else {
             console.warn("La respuesta del servidor no tiene el formato esperado:", datos);

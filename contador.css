@@ -2,9 +2,8 @@
 .barra-tokens {
     position: fixed;
     top: 15px;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 320px;
+    left: 15px;
+    width: 280px;
     max-width: 90%;
     padding: 12px 16px;
     background: #ffffff;

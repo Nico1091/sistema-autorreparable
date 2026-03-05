@@ -6,9 +6,9 @@
 body {
     margin: 0;
     height: 100vh;
-    background: #f9f9f9;
+    background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
     overflow-x: hidden;
-    font-family: 'Segoe UI', 'Roboto', Tahoma, Verdana, sans-serif;
+    font-family: 'Segoe UI', 'Roboto', 'Helvetica Neue', Tahoma, Verdana, sans-serif;
 }
 
 /* Animación slideUp */
@@ -65,7 +65,7 @@ body::before {
     flex-direction: column;
     justify-content: flex-start;
     align-items: center;
-    padding-top: 80px;
+    padding-top: 100px;
     padding-bottom: 120px;
     box-sizing: border-box;
 }
@@ -170,27 +170,27 @@ body::before {
    ======================== */
 
 .contenedor_chat {
-    position: relative;
+    position: fixed;
+    bottom: 30px;
+    left: 50%;
+    transform: translateX(-50%);
     display: flex;
     align-items: center;
     gap: 10px;
-    width: 120%;
-    max-width: 800px;
+    width: 90%;
+    max-width: 700px;
     padding: 8px 15px;
     background: #ffffff;
     border-radius: 50px;
     border: 1px solid #dfe6e9;
     box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
-    margin-top: 550px;
-    margin-left: 30%;
     pointer-events: auto;
     animation: slideUp 0.3s ease-out;
+    z-index: 100;
 }
 
 .contenedor_chat:hover {
     box-shadow: 0 6px 25px rgba(0, 0, 0, 0.12);
-    transform: translateY(-2px);
-    border-color: #6c5ce7;
 }
 
 /* Contenedor del input */
@@ -289,31 +289,29 @@ body::before {
    ======================== */
 
 #historial-chat {
-    width: 90%;
-    max-width: 650px;
-    max-height: 200px;
+    width: 100%;
+    max-width: 600px;
+    margin: 0 auto;
+    min-height: 300px;
+    max-height: 450px;
     overflow-y: auto;
-    margin-bottom: 15px;
-    padding: 15px;
-    color: rgba(255, 255, 255, 0.9);
+    padding: 20px;
+    color: #2d3436;
     font-size: 14px;
-    background: rgba(0, 0, 0, 0.2);
+    background: transparent;
     border-radius: 15px;
-    backdrop-filter: blur(5px);
-    display: none;
-    /* Oculto por defecto, actívalo si lo necesitas */
+    display: block;
 }
 
 #historial-chat::-webkit-scrollbar {
-    width: 6px;
+    width: 4px;
 }
 
 #historial-chat::-webkit-scrollbar-track {
-    background: rgba(255, 255, 255, 0.1);
-    border-radius: 3px;
+    background: transparent;
 }
 
 #historial-chat::-webkit-scrollbar-thumb {
-    background: rgba(255, 255, 255, 0.3);
-    border-radius: 3px;
+    background: #dfe6e9;
+    border-radius: 2px;
 }

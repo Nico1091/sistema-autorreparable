@@ -99,6 +99,7 @@
     <!-- Scripts -->
     <script src="contador.js"></script>
     <script src="sidebar.js"></script>
+    <script src="llamarLLaMA.js"></script>
     <script src="AccesoN.js"></script>
     <script src="conexion.js"></script>
     <script src="llamarQwen.js"></script>
@@ -163,24 +164,7 @@
             }
         });
 
-        // Función para agregar mensajes al chat
-        function agregarMensajeAlChat(rol, contenido) {
-            const historial = document.getElementById('historial-chat');
-            const mensajeDiv = document.createElement('div');
-            
-            if (rol === 'user') {
-                mensajeDiv.className = 'mensaje-usuario';
-                mensajeDiv.innerHTML = `<strong>Tú:</strong> ${contenido}`;
-            } else {
-                mensajeDiv.className = 'mensaje-asistente';
-                mensajeDiv.innerHTML = `<strong>Qwen:</strong> ${contenido}`;
-            }
-            
-            historial.appendChild(mensajeDiv);
-            
-            // Auto scroll al final
-            historial.scrollTop = historial.scrollHeight;
-        }
+        // Los mensajes se agregan desde chat_boton.js
 
         // Modificar la función de envío de mensaje para guardar en conversaciones
         const btnEnviarOriginal = document.getElementById('btn-enviar');
