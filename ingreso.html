@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ingreso - Vector Prisma</title>
+    <!--Estilos para concordancia-->
+    <link rel="stylesheet" href="index.css">
+    <link rel="stylesheet" href="animacion_index.css">
+    <link rel="stylesheet" href="Sender.css">
+    <link rel="stylesheet" href="Registro_usuario.css">
+    
+    <!-- Font Awesome para íconos -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    
+    <style>
+        body.seccion-entrada {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            background: linear-gradient(135deg, #0f0f23 0%, #1a1a2e 50%, #16213e 100%);
+        }
+        
+        .contenedor_ingreso {
+            background: rgba(255, 255, 255, 0.98);
+            padding: 40px;
+            border-radius: 20px;
+            box-shadow: 0 10px 50px rgba(102, 126, 234, 0.3);
+            width: 100%;
+            max-width: 380px;
+            text-align: center;
+            border: 1px solid rgba(102, 126, 234, 0.2);
+        }
+        
+        .contenedor_ingreso .logo {
+            font-size: 48px;
+            color: #667eea;
+            margin-bottom: 10px;
+        }
+        
+        .contenedor_ingreso h2 {
+            color: #1a1a2e;
+            margin-bottom: 30px;
+            font-size: 22px;
+            font-weight: 600;
+        }
+        
+        .contenedor_ingreso .chat_input {
+            width: 100%;
+            padding: 14px 16px;
+            margin-bottom: 15px;
+            border: 2px solid #e8e8e8;
+            border-radius: 10px;
+            font-size: 14px;
+            transition: all 0.3s ease;
+            box-sizing: border-box;
+            background: #fff;
+            color: #1a1a2e;
+        }
+        
+        .contenedor_ingreso .chat_input:focus {
+            border-color: #667eea;
+            outline: none;
+            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.15);
+            background: #fff;
+        }
+        
+        .contenedor_ingreso .chat_input::placeholder {
+            color: #aaa;
+        }
+        
+        .contenedor_ingreso .boton-ingresar {
+            width: 100%;
+            padding: 14px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            border-radius: 10px;
+            font-size: 15px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-top: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+        
+        .contenedor_ingreso .boton-ingresar:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 20px rgba(102, 126, 234, 0.4);
+        }
+        
+        .contenedor_ingreso .boton-ingresar:active {
+            transform: translateY(0);
+        }
+        
+        .contenedor_ingreso .boton-ingresar:disabled {
+            background: #ccc;
+            cursor: not-allowed;
+            transform: none;
+            box-shadow: none;
+        }
+        
+        .contenedor_ingreso a {
+            display: block;
+            text-align: center;
+            font-size: 13px;
+            color: #667eea;
+            text-decoration: none;
+            margin-top: 18px;
+            transition: color 0.3s ease;
+            font-weight: 500;
+        }
+        
+        .contenedor_ingreso a:hover {
+            color: #764ba2;
+            text-decoration: underline;
+        }
+        
+        .contenedor_ingreso .divider {
+            margin: 25px 0;
+            position: relative;
+            text-align: center;
+        }
+        
+        .contenedor_ingreso .divider::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 50%;
+            width: 100%;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, #e0e0e0, transparent);
+        }
+        
+        .contenedor_ingreso .divider span {
+            background: #fff;
+            padding: 0 15px;
+            color: #999;
+            font-size: 12px;
+            position: relative;
+        }
+        
+        .contenedor_ingreso .mensaje-error {
+            color: #e74c3c;
+            font-size: 13px;
+            margin-bottom: 15px;
+            padding: 10px;
+            border-radius: 8px;
+            background: rgba(231, 76, 60, 0.1);
+            display: none;
+        }
+        
+        .contenedor_ingreso .mensaje-error.visible {
+            display: block;
+        }
+        
+        .contenedor_ingreso .loading {
+            display: inline-block;
+            width: 16px;
+            height: 16px;
+            border: 2px solid #ffffff;
+            border-radius: 50%;
+            border-top-color: transparent;
+            animation: spin 0.8s linear infinite;
+        }
+        
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+    </style>
+</head>
+
+<body class="seccion-entrada">
+    
+    <div id="sistema_operativo"></div>
+    <div class="contenedor_ingreso">
+        <div class="logo">
+            <i class="fas fa-cube"></i>
+        </div>
+        <h2>Bienvenido</h2>
+        
+        <div id="mensaje-error" class="mensaje-error"></div>
+        
+        <input type="text" id="ingreso_usuario" placeholder="Usuario" class="chat_input">
+        <input type="password" id="ingreso_pass" placeholder="Contraseña" class="chat_input">
+
+        <button id="boton-ingresar" class="boton-ingresar" onclick="ejecutarIngreso()">
+            <i class="fas fa-sign-in-alt"></i> <span>Ingresar</span>
+        </button>
+
+        <div class="divider">
+            <span>Ó</span>
+        </div>
+
+        <a href="Registro_usuario.html">
+            <i class="fas fa-user-plus"></i> Crear cuenta nueva
+        </a>
+        
+        <a href="index.html">
+            <i class="fas fa-arrow-left"></i> Volver
+        </a>
+    </div>
+    
+    <script src="conexionbdAdominio.js"></script>
+    <script>
+        async function ejecutarIngreso() {
+            const usuario = document.getElementById('ingreso_usuario').value.trim();
+            const pass = document.getElementById('ingreso_pass').value.trim();
+            const boton = document.getElementById('boton-ingresar');
+            const mensajeError = document.getElementById('mensaje-error');
+            
+            // Resetear mensaje de error
+            mensajeError.classList.remove('visible');
+            mensajeError.textContent = '';
+            
+            if (!usuario || !pass) {
+                mensajeError.textContent = 'Por favor complete todos los campos';
+                mensajeError.classList.add('visible');
+                return;
+            }
+            
+            // Mostrar estado de carga
+            boton.disabled = true;
+            boton.innerHTML = '<span class="loading"></span> Verificando...';
+            
+            try {
+                // Verificar credenciales usando la función de la base de datos
+                const esValido = await window.verificarCredenciales(usuario, pass);
+                
+                if (esValido) {
+                    // Credenciales correctas - redirigir
+                    window.location.href = 'index.html';
+                } else {
+                    // Credenciales incorrectas
+                    mensajeError.textContent = 'Usuario o contraseña incorrectos';
+                    mensajeError.classList.add('visible');
+                }
+            } catch (error) {
+                console.error('Error en el login:', error);
+                mensajeError.textContent = 'Error de conexión. Por favor intente más tarde.';
+                mensajeError.classList.add('visible');
+            } finally {
+                // Restaurar botón
+                boton.disabled = false;
+                boton.innerHTML = '<i class="fas fa-sign-in-alt"></i> <span>Ingresar</span>';
+            }
+        }
+        
+        // Permitir enter para enviar
+        document.getElementById('ingreso_pass').addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                ejecutarIngreso();
+            }
+        });
+        
+        // También permitir enter en el usuario
+        document.getElementById('ingreso_usuario').addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                ejecutarIngreso();
+            }
+        });
+    </script>
+</body>
+
+</html>

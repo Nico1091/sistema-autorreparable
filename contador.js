@@ -37,6 +37,9 @@ const BarraTokens = (function() {
                     <div class="barra-relleno" id="barra-relleno"></div>
                 </div>
                 <div class="barra-porcentaje" id="barra-porcentaje">0%</div>
+                <button class="boton-ingreso" onclick="window.location.href='ingreso.html'">
+                    <i class="fas fa-sign-in-alt"></i> Ingrese
+                </button>
             </div>
         `;
         document.body.appendChild(barra);

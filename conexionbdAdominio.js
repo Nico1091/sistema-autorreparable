@@ -68,7 +68,11 @@ async function registro(usuario, correo, password) {
         console.log("Estado de registro:", resultado.msj);
 
         if (resultado.status === "Exito") {
-            // El manejo del mensaje y redirección se hace en ejecutarRegistro()
+            // Guardar también en localStorage para login offline
+            const usuariosRegistrados = JSON.parse(localStorage.getItem('usuarios_registrados') || '[]');
+            usuariosRegistrados.push({ usuario: usuario, correo: correo, password: password });
+            localStorage.setItem('usuarios_registrados', JSON.stringify(usuariosRegistrados));
+            console.log("Usuario guardado en localStorage para login offline");
             return true;
         } else {
             alert('Error en el registro: ' + resultado.msj);
@@ -80,6 +84,81 @@ async function registro(usuario, correo, password) {
     }
 }
 window.registro = registro;
+
+// URL para login (servidor remoto)
+const url_login = "https://postvental.com.co/login.php";
+
+/**
+ * Verifica las credenciales del usuario en la base de datos
+ * @param {string} usuario
+ * @param {string} password
+ * @returns {Promise<boolean>}
+ */
+async function verificarCredenciales(usuario, password) {
+    try {
+        // Tokenizar las credenciales
+        const tokenUsuario = await tokenizarSnake256(usuario);
+        const tokenPassword = await tokenizarSnake256(password);
+        
+        // Primero verificar localmente si hay usuarios registrados
+        const usuariosRegistrados = JSON.parse(localStorage.getItem('usuarios_registrados') || '[]');
+        const usuarioEncontrado = usuariosRegistrados.find(u => 
+            u.usuario === tokenUsuario && u.password === tokenPassword
+        );
+        
+        if (usuarioEncontrado) {
+            // Login local exitoso
+            sessionStorage.setItem('usuario_logueado', usuario);
+            sessionStorage.setItem('token_usuario', tokenUsuario);
+            console.log("Login local exitoso");
+            return true;
+        }
+        
+        // Si no está en local, intentar en el servidor
+        const respuesta = await fetch(url_login, {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({
+                usuario: tokenUsuario,
+                password: tokenPassword
+            })
+        });
+        const resultado = await respuesta.json();
+        console.log("Estado de login:", resultado.msj);
+
+        if (resultado.status === "Exito") {
+            // Guardar sesión del usuario
+            sessionStorage.setItem('usuario_logueado', usuario);
+            sessionStorage.setItem('token_usuario', tokenUsuario);
+            // También guardar localmente para futuras verificaciones
+            usuariosRegistrados.push({ usuario: tokenUsuario, password: tokenPassword });
+            localStorage.setItem('usuarios_registrados', JSON.stringify(usuariosRegistrados));
+            return true;
+        } else {
+            alert(resultado.msj || 'Usuario o contraseña incorrectos');
+            return false;
+        }
+    } catch (error) {
+        console.error("Fallo de conexión en el módulo login:", error);
+        // Intentar login local como fallback
+        const usuariosRegistrados = JSON.parse(localStorage.getItem('usuarios_registrados') || '[]');
+        const tokenUsuario = await tokenizarSnake256(usuario);
+        const tokenPassword = await tokenizarSnake256(password);
+        const usuarioEncontrado = usuariosRegistrados.find(u => 
+            u.usuario === tokenUsuario && u.password === tokenPassword
+        );
+        if (usuarioEncontrado) {
+            sessionStorage.setItem('usuario_logueado', usuario);
+            sessionStorage.setItem('token_usuario', tokenUsuario);
+            alert('Login exitoso (modo offline)');
+            return true;
+        }
+        alert('Error de conexión. Por favor intente más tarde.');
+        return false;
+    }
+}
+window.verificarCredenciales = verificarCredenciales;
+
 function irARegistro() {
     window.location.href = "Registro_usuario.html";
 }

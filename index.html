@@ -12,9 +12,53 @@
     <link rel="stylesheet" href="Sender.css">
     <link rel="stylesheet" href="AccesoN.css">
     <link rel="stylesheet" href="contador.css">
+    <link rel="stylesheet" href="sidebar.css">
     
     <!-- Font Awesome para íconos -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    
+    <style>
+        /* Estilos para hacer el chat scrollable */
+        #interfaz-operativa {
+            margin-left: 0;
+            transition: margin-left 0.3s ease;
+            min-height: calc(100vh - 100px);
+            padding-bottom: 100px;
+        }
+
+        #historial-chat {
+            max-height: 70vh;
+            overflow-y: auto;
+            padding: 20px;
+            padding-top: 80px;
+            padding-bottom: 120px;
+        }
+
+        /* Scrollbar personalizada para el chat */
+        #historial-chat::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        #historial-chat::-webkit-scrollbar-track {
+            background: rgba(0, 0, 0, 0.1);
+        }
+
+        #historial-chat::-webkit-scrollbar-thumb {
+            background: rgba(102, 126, 234, 0.4);
+            border-radius: 4px;
+        }
+
+        #historial-chat::-webkit-scrollbar-thumb:hover {
+            background: rgba(102, 126, 234, 0.6);
+        }
+
+        /* Panel de respuestas también scrollable */
+        .Panel_Answers {
+            max-height: 60vh;
+            overflow-y: auto;
+            padding: 20px;
+        }
+    </style>
 </head>
 <body>
     <!-- Estado de conexión (controlado por JS) -->
@@ -27,7 +71,7 @@
 
     <!-- Interfaz principal -->
     <div id="interfaz-operativa" style="display: block;">
-        <!-- Historial de chat (opcional) -->
+        <!-- Historial de chat (scrollable) -->
         <div id="historial-chat"></div>
         
         <!-- Contenedor del chat - CORREGIDO (contenedor_chat con E) -->
@@ -49,6 +93,7 @@
 
     <!-- Scripts -->
     <script src="contador.js"></script>
+    <script src="sidebar.js"></script>
     <script src="AccesoN.js"></script>
     <script src="conexion.js"></script>
     <script src="llamarQwen.js"></script>
@@ -61,6 +106,52 @@
         window.irARegistro = window.irARegistro || function() {
             window.location.href = "Registro_usuario.html";
         };
+
+        // Integrar GestorConversaciones con el chat
+        // Escuchar eventos de cargar conversación
+        window.addEventListener('cargarConversacion', function(e) {
+            const conv = e.detail.conversacion;
+            const historial = document.getElementById('historial-chat');
+            historial.innerHTML = '';
+            
+            // Cargar mensajes en el chat
+            if (conv && conv.mensajes) {
+                conv.mensajes.forEach(msg => {
+                    agregarMensajeAlChat(msg.rol, msg.contenido);
+                });
+            }
+        });
+
+        // Función para agregar mensajes al chat
+        function agregarMensajeAlChat(rol, contenido) {
+            const historial = document.getElementById('historial-chat');
+            const mensajeDiv = document.createElement('div');
+            
+            if (rol === 'user') {
+                mensajeDiv.className = 'mensaje-usuario';
+                mensajeDiv.innerHTML = `<strong>Tú:</strong> ${contenido}`;
+            } else {
+                mensajeDiv.className = 'mensaje-asistente';
+                mensajeDiv.innerHTML = `<strong>Qwen:</strong> ${contenido}`;
+            }
+            
+            historial.appendChild(mensajeDiv);
+            
+            // Auto scroll al final
+            historial.scrollTop = historial.scrollHeight;
+        }
+
+        // Modificar la función de envío de mensaje para guardar en conversaciones
+        const btnEnviarOriginal = document.getElementById('btn-enviar');
+        if (btnEnviarOriginal) {
+            btnEnviarOriginal.addEventListener('click', function() {
+                const input = document.getElementById('input_chat');
+                const mensaje = input.value.trim();
+                if (mensaje && window.GestorConversaciones) {
+                    window.GestorConversaciones.agregarMensaje('user', mensaje);
+                }
+            });
+        }
     </script>
 </body>
 </html>
