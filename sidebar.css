@@ -26,6 +26,23 @@
     align-items: center;
 }
 
+.sidebar-usuario {
+    padding: 15px 20px;
+    background: rgba(102, 126, 234, 0.2);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    color: #fff;
+    font-size: 14px;
+    font-weight: 600;
+}
+
+.sidebar-usuario i {
+    color: #667eea;
+    font-size: 18px;
+}
+
 .sidebar-header h3 {
     color: #fff;
     font-size: 16px;
@@ -163,6 +180,10 @@
 .sidebar-nueva {
     padding: 15px;
     border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.sidebar-nueva .btn-logout {
+    display: none;
 }
 
 .btn-nueva-conversacion {

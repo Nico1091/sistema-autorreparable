@@ -5,11 +5,17 @@ const GestorConversaciones = (function() {
     let conversacionActual = null;
     let sidebarElemento = null;
     let toggleButton = null;
+    let usuarioActual = null;
+
+    // Obtener usuario actual
+    function getUsuarioActual() {
+        return sessionStorage.getItem('usuario_logueado') || 'invitado';
+    }
 
     // Cargar conversaciones desde localStorage
     function cargarConversaciones() {
-        const usuario = sessionStorage.getItem('usuario_logueado') || 'invitado';
-        const clave = `conversaciones_${usuario}`;
+        usuarioActual = getUsuarioActual();
+        const clave = `conversaciones_${usuarioActual}`;
         const guardadas = localStorage.getItem(clave);
         
         if (guardadas) {
@@ -19,6 +25,8 @@ const GestorConversaciones = (function() {
                 console.error('Error al cargar conversaciones:', e);
                 conversaciones = [];
             }
+        } else {
+            conversaciones = [];
         }
         
         return conversaciones;
@@ -26,9 +34,28 @@ const GestorConversaciones = (function() {
 
     // Guardar conversaciones en localStorage
     function guardarConversaciones() {
-        const usuario = sessionStorage.getItem('usuario_logueado') || 'invitado';
-        const clave = `conversaciones_${usuario}`;
+        if (!usuarioActual) {
+            usuarioActual = getUsuarioActual();
+        }
+        const clave = `conversaciones_${usuarioActual}`;
         localStorage.setItem(clave, JSON.stringify(conversaciones));
+    }
+
+    // Recargar conversaciones (para cuando cambia el usuario)
+    function recargarParaUsuario() {
+        cargarConversaciones();
+        
+        // Actualizar nombre de usuario en el sidebar
+        actualizarUsuario();
+        
+        // Si no hay conversación actual, crear una
+        if (conversaciones.length === 0) {
+            crearConversacion();
+        } else {
+            cargarConversacion(conversaciones[0].id);
+        }
+        
+        renderizarLista();
     }
 
     // Generar título automático basado en el primer mensaje
@@ -228,6 +255,9 @@ const GestorConversaciones = (function() {
         toggleButton.onclick = toggleSidebar;
         document.body.appendChild(toggleButton);
         
+        // Obtener nombre de usuario para mostrar
+        const nombreUsuario = sessionStorage.getItem('usuario_logueado') || 'Invitado';
+        
         // Crear sidebar
         sidebarElemento = document.createElement('div');
         sidebarElemento.className = 'sidebar';
@@ -239,11 +269,18 @@ const GestorConversaciones = (function() {
                     <i class="fas fa-times"></i>
                 </button>
             </div>
+            <div class="sidebar-usuario">
+                <i class="fas fa-user-circle"></i>
+                <span>${nombreUsuario}</span>
+            </div>
             <div class="sidebar-conversaciones" id="lista-conversaciones">
             </div>
             <div class="sidebar-nueva">
                 <button class="btn-nueva-conversacion" onclick="GestorConversaciones.nuevaConversacion()">
                     <i class="fas fa-plus"></i> Nueva conversación
+                </button>
+                <button class="btn-nueva-conversacion btn-logout" onclick="cerrarSesion()" style="margin-top: 10px; background: linear-gradient(135deg, #e74c3c 0%, #c0392b 100%)">
+                    <i class="fas fa-sign-out-alt"></i> Cerrar sesión
                 </button>
             </div>
         `;
@@ -297,6 +334,30 @@ const GestorConversaciones = (function() {
         }
     }
 
+    // Actualizar nombre de usuario en el sidebar
+    function actualizarUsuario() {
+        const nombreUsuario = sessionStorage.getItem('usuario_logueado') || 'Invitado';
+        const elementoUsuario = document.querySelector('.sidebar-usuario span');
+        if (elementoUsuario) {
+            elementoUsuario.textContent = nombreUsuario;
+        }
+        
+        // Actualizar visibilidad del botón de logout en sidebar
+        const btnLogout = document.querySelector('.btn-logout');
+        if (btnLogout) {
+            if (nombreUsuario && nombreUsuario !== 'Invitado') {
+                btnLogout.style.display = 'flex';
+            } else {
+                btnLogout.style.display = 'none';
+            }
+        }
+        
+        // Notificar que el usuario cambió para actualizar UI
+        window.dispatchEvent(new CustomEvent('usuarioActualizado', { 
+            detail: { usuario: nombreUsuario } 
+        }));
+    }
+
     // Inicializar
     function inicializar() {
         if (document.readyState === 'loading') {
@@ -304,6 +365,14 @@ const GestorConversaciones = (function() {
         } else {
             crearSidebar();
         }
+        
+        // Escuchar cambios en sessionStorage (cuando usuario inicia/cierra sesión)
+        window.addEventListener('storage', function(e) {
+            if (e.key === 'usuario_logueado') {
+                // El usuario cambió, recargar conversaciones
+                recargarParaUsuario();
+            }
+        });
     }
 
     // Inicializar
@@ -323,6 +392,8 @@ const GestorConversaciones = (function() {
         toggleSidebar,
         cerrarSidebar,
         abrirSidebar,
+        recargarParaUsuario,
+        actualizarUsuario,
         getTodas: () => conversaciones
     };
 })();

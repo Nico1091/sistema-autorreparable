@@ -64,9 +64,14 @@
     <!-- Estado de conexión (controlado por JS) -->
     <div id="estado" style="display: none;">DESCONECTADO</div>
     
-    <!-- Botón de registro - CORREGIDO -->
-    <button class="boton-registro-destacado" onclick="irARegistro()">
+    <!-- Botón de registro - solo visible si no está logueado -->
+    <button class="boton-registro-destacado" id="btn-registro" onclick="irARegistro()">
         <i class="fas fa-user-plus"></i> Registrate aquí
+    </button>
+
+    <!-- Botón de cerrar sesión - solo visible si está logueado -->
+    <button class="boton-registro-destacado" id="btn-logout" style="display: none;" onclick="cerrarSesion()">
+        <i class="fas fa-sign-out-alt"></i> Cerrar sesión
     </button>
 
     <!-- Interfaz principal -->
@@ -106,6 +111,42 @@
         window.irARegistro = window.irARegistro || function() {
             window.location.href = "Registro_usuario.html";
         };
+
+        // Función para cerrar sesión
+        window.cerrarSesion = function() {
+            sessionStorage.removeItem('usuario_logueado');
+            sessionStorage.removeItem('token_usuario');
+            
+            const btnRegistro = document.getElementById('btn-registro');
+            const btnLogout = document.getElementById('btn-logout');
+            
+            if (btnRegistro) btnRegistro.style.display = 'flex';
+            if (btnLogout) btnLogout.style.display = 'none';
+            
+            if (window.BarraTokens && window.BarraTokens.actualizarBotonIngreso) {
+                window.BarraTokens.actualizarBotonIngreso();
+            }
+            
+            window.location.href = 'ingreso.html';
+        };
+
+        function actualizarBotonesAuth() {
+            const usuarioLogueado = sessionStorage.getItem('usuario_logueado');
+            const btnRegistro = document.getElementById('btn-registro');
+            const btnLogout = document.getElementById('btn-logout');
+            
+            if (btnRegistro && btnLogout) {
+                if (usuarioLogueado) {
+                    btnRegistro.style.display = 'none';
+                    btnLogout.style.display = 'flex';
+                } else {
+                    btnRegistro.style.display = 'flex';
+                    btnLogout.style.display = 'none';
+                }
+            }
+        }
+
+        document.addEventListener('DOMContentLoaded', actualizarBotonesAuth);
 
         // Integrar GestorConversaciones con el chat
         // Escuchar eventos de cargar conversación

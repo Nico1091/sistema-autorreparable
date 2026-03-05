@@ -22,6 +22,15 @@ const BarraTokens = (function() {
         const barra = document.createElement('div');
         barra.className = 'barra-tokens';
         barra.id = 'barraTokens';
+        
+        // Verificar si hay usuario logueado
+        const usuarioLogueado = sessionStorage.getItem('usuario_logueado');
+        const botonIngreso = usuarioLogueado 
+            ? '' 
+            : `<button class="boton-ingreso" onclick="window.location.href='ingreso.html'">
+                <i class="fas fa-sign-in-alt"></i> Ingrese
+               </button>`;
+        
         barra.innerHTML = `
             <div class="barra-tokens-container">
                 <div class="barra-tokens-label">
@@ -37,9 +46,7 @@ const BarraTokens = (function() {
                     <div class="barra-relleno" id="barra-relleno"></div>
                 </div>
                 <div class="barra-porcentaje" id="barra-porcentaje">0%</div>
-                <button class="boton-ingreso" onclick="window.location.href='ingreso.html'">
-                    <i class="fas fa-sign-in-alt"></i> Ingrese
-                </button>
+                ${botonIngreso}
             </div>
         `;
         document.body.appendChild(barra);
@@ -153,6 +160,22 @@ const BarraTokens = (function() {
         console.log('[Barra Tokens] Inicializada - Límite: ' + LIMITE_TOKENS.toLocaleString() + ' tokens');
     }
 
+    // Función para actualizar visibilidad del botón de ingreso
+    function actualizarBotonIngreso() {
+        if (!barraElemento) return;
+        
+        const usuarioLogueado = sessionStorage.getItem('usuario_logueado');
+        const boton = barraElemento.querySelector('.boton-ingreso');
+        
+        if (boton) {
+            if (usuarioLogueado) {
+                boton.style.display = 'none';
+            } else {
+                boton.style.display = 'block';
+            }
+        }
+    }
+
     // Hook para integrar con llamarQwen
     function hookLlamarQwen() {
         const originalFuncion = window.llamarQwen;
@@ -200,6 +223,7 @@ const BarraTokens = (function() {
         getBreakdown,
         resetear,
         hookLlamarQwen,
+        actualizarBotonIngreso,
         LIMITE: LIMITE_TOKENS
     };
 })();
