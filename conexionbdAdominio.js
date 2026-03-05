@@ -1,3 +1,18 @@
+// Función de tokenización snake-256
+// Combina SHA-256 con formato estilo snake
+async function tokenizarSnake256(entrada) {
+    const encoder = new TextEncoder();
+    const data = encoder.encode(entrada);
+    const hashBuffer = await crypto.subtle.digest('SHA-256', data);
+    const hashArray = Array.from(new Uint8Array(hashBuffer));
+    const hashHex = hashArray.map(b => b.toString(16).padStart(2, '0')).join('');
+    const grupos = [];
+    for (let i = 0; i < hashHex.length; i += 8) {
+        grupos.push(hashHex.substring(i, i + 8));
+    }
+    return grupos.join('_');
+}
+
 //Constante de conexion a la base de datos
 const url_bd = "https://postvental.com.co/guardar.php";
 /**
@@ -68,3 +83,34 @@ function irARegistro() {
     window.location.href = "Registro_usuario.html";
 }
 window.irARegistro = irARegistro;
+
+// Exportar función de tokenización para uso global
+window.tokenizarSnake256 = tokenizarSnake256;
+
+/**
+ * Sincroniza una sesión de usuario con token snake-256
+ * @param {string} usuario - Nombre de usuario (se tokeniza automáticamente)
+ * @param {string} contenido - Contenido del mensaje
+ */
+async function sincronizarSesionUsuarioTokenizada(usuario, contenido) {
+    try {
+        const tokenUsuario = await tokenizarSnake256(usuario);
+        const respuesta = await fetch(url_bd, {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                rol: "usuario_tokenizado",
+                contenido: contenido,
+                modelo: "qwen/qwen2.5-coder-14b",
+                token_usuario: tokenUsuario
+            })
+        });
+        const resultado = await respuesta.json();
+        console.log("Sesión de usuario tokenizada sincronizada:", resultado.msj || "Sincronizando");
+    } catch (error) {
+        console.error("Fallo crítico en la sincronización de sesión tokenizada");
+    }
+}
+window.sincronizarSesionUsuarioTokenizada = sincronizarSesionUsuarioTokenizada;
