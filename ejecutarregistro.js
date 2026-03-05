@@ -41,16 +41,22 @@ async function ejecutarRegistro() {
     const pass = document.getElementById('reg_pass').value;
 
     if (!user || !mail || !pass) {
-        //Aclararle a l usuario que rellemne todos los campos
+        alert('Por favor complete todos los campos');
         return;
     }
 
     // Tokenizar los datos del usuario antes de enviarlos
     const datosTokenizados = await tokenizarDatosUsuario(user, mail, pass);
     
-    await window.registro(
+    const exito = await window.registro(
         datosTokenizados.usuario, 
         datosTokenizados.correo, 
         datosTokenizados.password
     );
+    
+    // Solo mostrar mensaje y redireccionar si el registro fue exitoso
+    if (exito) {
+        alert('¡Registro exitoso! Bienvenido a Vector Prisma');
+        window.location.href = 'index.html';
+    }
 }

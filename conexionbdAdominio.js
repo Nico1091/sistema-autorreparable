@@ -68,14 +68,15 @@ async function registro(usuario, correo, password) {
         console.log("Estado de registro:", resultado.msj);
 
         if (resultado.status === "Exito") {
-            //Condicional para ver si es o no exitosa la consulta 
-            console.log("El cliente ingreso al sistema");
+            // El manejo del mensaje y redirección se hace en ejecutarRegistro()
+            return true;
         } else {
-            console.log("Error en registro: ", resultado.msj);
-
+            alert('Error en el registro: ' + resultado.msj);
+            return false;
         }
     } catch (error) {
         console.error("fallo de conexion en el modulo registro");
+        alert('Error de conexión. Por favor intente más tarde.');
     }
 }
 window.registro = registro;
