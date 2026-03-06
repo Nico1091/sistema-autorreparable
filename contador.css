@@ -1,9 +1,9 @@
 /* Barra de progreso de tokens - Estilo Minimalista */
 .barra-tokens {
     position: fixed;
-    top: 15px;
+    top: 70px;
     left: 15px;
-    width: 280px;
+    width: 260px;
     max-width: 90%;
     padding: 12px 16px;
     background: #ffffff;

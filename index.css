@@ -100,6 +100,64 @@ body::before {
     border-color: #6c5ce7;
 }
 
+/* Botón de Mercado */
+.boton-mercado {
+    position: fixed;
+    top: 20px;
+    left: 15px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 18px;
+    font-size: 12px;
+    font-weight: 500;
+    color: #2d3436;
+    background: #ffffff;
+    border: 1px solid #dfe6e9;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+    z-index: 1000;
+}
+
+.boton-mercado:hover {
+    background: #00b894;
+    color: #ffffff;
+    border-color: #00b894;
+}
+
+.boton-mercado i {
+    font-size: 12px;
+}
+
+/* Botón de Derecho Judicial */
+.boton-derecho {
+    position: fixed;
+    top: 55px;
+    left: 15px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 18px;
+    font-size: 12px;
+    font-weight: 500;
+    color: #2d3436;
+    background: #ffffff;
+    border: 1px solid #dfe6e9;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+    z-index: 1000;
+}
+
+.boton-derecho:hover {
+    background: #f39c12;
+    color: #ffffff;
+    border-color: #f39c12;
+}
+
 .boton-registro-destacado i {
     font-size: 12px;
 }

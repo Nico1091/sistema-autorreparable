@@ -10,9 +10,48 @@
     <link rel="stylesheet" href="animacion_index.css">
     <link rel="stylesheet" href="Sender.css">
     <link rel="stylesheet" href="Registro_usuario.css"> 
-</head>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    
+    <style>
+        /* Botón de Mercado fijo */
+        .btn-mercado-fijo {
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 10px 18px;
+            font-size: 12px;
+            font-weight: 500;
+            color: #fff;
+            background: #00b894;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+            z-index: 1000;
+        }
+        
+        .btn-mercado-fijo:hover {
+            background: #00a383;
+            transform: scale(1.05);
+        }
+    </style>
+    </head>
 
 <body class="seccion-entrada">
+    
+    <!-- Botón de mercado -->
+    <button class="btn-mercado-fijo" onclick="window.location.href='mercado.html'">
+        <i class="fas fa-chart-line"></i> Mercado
+    </button>
+    
+    <!-- Botón de derecho judicial -->
+    <button class="btn-mercado-fijo" style="top: 70px;" onclick="window.location.href='derechojudicial.html'">
+        <i class="fas fa-gavel"></i> Derecho Judicial
+    </button>
     
     <div id="sistema_operativo"></div>
     <div class="contenedor_registro">

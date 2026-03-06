@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Derecho Judicial - Colombia</title>
+    <link rel="stylesheet" href="derechojudicial.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <!-- Botón para volver al chat -->
+    <button class="btn-volver" onclick="window.location.href='index.html'">
+        <i class="fas fa-arrow-left"></i> Volver al Chat
+    </button>
+
+    <!-- Header -->
+    <header>
+        <div class="header-content">
+            <i class="fas fa-gavel"></i>
+            <h1>Derecho Judicial Colombia</h1>
+            <p>Noticias y análisis jurídico colombiano</p>
+        </div>
+    </header>
+
+    <!-- Sección de noticias -->
+    <main>
+        <section class="noticias-section">
+            <div class="section-header">
+                <h2><i class="fas fa-newspaper"></i> Últimas Noticias Judiciales</h2>
+                <button class="btn-actualizar" onclick="cargarNoticias()">
+                    <i class="fas fa-sync-alt"></i> Actualizar
+                </button>
+            </div>
+            
+            <div id="noticias-container" class="noticias-grid">
+                <div class="loading">
+                    <i class="fas fa-spinner fa-spin"></i>
+                    Cargando noticias judiciales...
+                </div>
+            </div>
+        </section>
+
+        <!-- Sección de análisis IA -->
+        <section class="analisis-section">
+            <div class="section-header">
+                <h2><i class="fas fa-robot"></i> Análisis con IA</h2>
+                <span class="modelo-badge">
+                    <i class="fas fa-brain"></i> dolphin-2.9-llama3-8b-old
+                </span>
+            </div>
+            
+            <!-- Chat de análisis -->
+            <div id="chat-analisis" class="chat-container">
+                <div class="chat-messages" id="mensajes-analisis">
+                    <div class="mensaje-sistema">
+                        <i class="fas fa-info-circle"></i>
+                        <p>Consulta noticias judiciales o pide análisis sobre procesos legales en Colombia. La IA puede responder sobre fallos, reformas, y procedimientos judiciales.</p>
+                    </div>
+                </div>
+                
+                <div class="chat-input-area">
+                    <input type="text" id="pregunta-analisis" placeholder="Escribe tu pregunta sobre derecho judicial..." 
+                           onkeypress="if(event.key==='Enter')enviarPregunta()">
+                    <button class="btn-enviar" onclick="enviarPregunta()">
+                        <i class="fas fa-paper-plane"></i> Enviar
+                    </button>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        <p><i class="fas fa-balance-scale"></i> Sistema de Información Jurídica - Colombia</p>
+        <p class="disclaimer">Las noticias son obtenidas de fuentes públicas. No constituye asesoría legal.</p>
+    </footer>
+
+    <script src="derechojudicial.js"></script>
+</body>
+</html>
