@@ -1,15 +1,46 @@
 // Barra de progreso de tokens gastados
 // Este módulo cuenta los tokens utilizados en las conversaciones con Qwen
 // Límite: 200,000 tokens
+// Los tokens se guardan en localStorage para persistir entre sesiones
 
 const BarraTokens = (function() {
     // Constantes privadas
     const LIMITE_TOKENS = 200000;
+    const STORAGE_KEY = 'tokens_gastados_usuario';
     
     // Variables privadas
     let tokensInput = 0;
     let tokensOutput = 0;
     let barraElemento = null;
+
+    // Función para cargar tokens desde localStorage
+    function cargarTokens() {
+        try {
+            const datosGuardados = localStorage.getItem(STORAGE_KEY);
+            if (datosGuardados) {
+                const datos = JSON.parse(datosGuardados);
+                tokensInput = datos.input || 0;
+                tokensOutput = datos.output || 0;
+                console.log('[Barra Tokens] Tokens cargados desde almacenamiento:', { input: tokensInput, output: tokensOutput });
+            }
+        } catch (e) {
+            console.error('[Barra Tokens] Error al cargar tokens:', e);
+        }
+    }
+
+    // Función para guardar tokens en localStorage
+    function guardarTokens() {
+        try {
+            const datos = {
+                input: tokensInput,
+                output: tokensOutput,
+                ultimoAcceso: new Date().toISOString()
+            };
+            localStorage.setItem(STORAGE_KEY, JSON.stringify(datos));
+        } catch (e) {
+            console.error('[Barra Tokens] Error al guardar tokens:', e);
+        }
+    }
 
     // Función para estimar tokens (aproximación: ~3.5 caracteres por token)
     function estimarTokens(texto) {
@@ -116,6 +147,7 @@ const BarraTokens = (function() {
     function agregarTokensInput(texto) {
         const tokens = estimarTokens(texto);
         tokensInput += tokens;
+        guardarTokens(); // Guardar en localStorage
         actualizarDisplay();
     }
 
@@ -123,6 +155,7 @@ const BarraTokens = (function() {
     function agregarTokensOutput(texto) {
         const tokens = estimarTokens(texto);
         tokensOutput += tokens;
+        guardarTokens(); // Guardar en localStorage
         actualizarDisplay();
     }
 
@@ -146,12 +179,14 @@ const BarraTokens = (function() {
     function resetear() {
         tokensInput = 0;
         tokensOutput = 0;
+        guardarTokens(); // Guardar en localStorage
         actualizarDisplay();
         console.log('[Barra Tokens] Contador reseteado');
     }
 
     // Inicialización
     function inicializar() {
+        cargarTokens(); // Cargar tokens guardados desde localStorage
         if (document.readyState === 'loading') {
             document.addEventListener('DOMContentLoaded', crearBarra);
         } else {
